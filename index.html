@@ -10,8 +10,7 @@
     body { background: #FAF7F2; font-family: 'Playfair Display', Georgia, serif; min-height: 100vh; }
     #app { max-width: 390px; margin: 0 auto; min-height: 100vh; background: #FAF7F2; }
 
-    .topo { background: #fff; padding: 28px 24px 20px; border-bottom: 0.5px solid #E8D5BC; }
-    .topo-center { text-align: center; padding: 40px 24px 28px; }
+    .topo { background: #fff; padding: 28px 24px 20px; border-bottom: 0.5px solid #E8D5BC; text-align: center; }
     .logo { font-size: 26px; font-weight: 700; color: #2C2218; letter-spacing: 6px; text-transform: uppercase; }
     .sub { font-size: 11px; color: #8B7355; letter-spacing: 3px; margin-top: 2px; font-style: italic; }
     .corpo { padding: 24px 20px; }
@@ -29,7 +28,7 @@
 
     .btn-primario { width: 100%; padding: 15px; background: #2C2218; color: #F5EDE0;
       border: none; border-radius: 10px; font-size: 13px; font-family: 'Playfair Display', serif;
-      letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 8px; transition: opacity .2s; }
+      letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 8px; }
     .btn-primario:disabled { opacity: 0.4; cursor: default; }
     .btn-secundario { width: 100%; padding: 13px; background: none; border: 0.5px solid #E8D5BC;
       color: #8B7355; border-radius: 10px; font-size: 12px; font-family: 'Playfair Display', serif;
@@ -39,9 +38,33 @@
       font-family: 'Playfair Display', serif; cursor: pointer; margin-bottom: 20px;
       display: flex; align-items: center; gap: 6px; letter-spacing: 1px; }
 
+    /* Redes sociais */
+    .redes-titulo { text-align: center; font-size: 11px; color: #8B7355; letter-spacing: 2px;
+      text-transform: uppercase; margin-top: 32px; margin-bottom: 14px; }
+    .redes-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+    .rede-btn { display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 7px; padding: 14px 8px; background: #fff; border: 0.5px solid #E8D5BC;
+      border-radius: 14px; cursor: pointer; text-decoration: none; transition: all .2s; }
+    .rede-btn:active { transform: scale(0.96); background: #F5EDE0; }
+    .rede-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .rede-nome { font-size: 10px; color: #8B7355; letter-spacing: 1px; font-family: 'Playfair Display', serif; }
+
+    /* Menu cards */
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
+    .menu-card { background: #fff; border: 0.5px solid #E8D5BC; border-radius: 16px;
+      padding: 24px 16px; text-align: center; cursor: pointer; transition: all .2s; }
+    .menu-card:active { transform: scale(0.97); }
+    .menu-card.destaque { background: #2C2218; border-color: #2C2218; }
+    .menu-card-icon { font-size: 28px; margin-bottom: 12px; }
+    .menu-card-titulo { font-size: 14px; font-weight: 700; color: #2C2218; letter-spacing: 0.5px; }
+    .menu-card.destaque .menu-card-titulo { color: #F5EDE0; }
+    .menu-card-sub { font-size: 11px; color: #8B7355; margin-top: 4px; letter-spacing: 0.5px; }
+    .menu-card.destaque .menu-card-sub { color: #E8D5BC; }
+
+    /* Cards procedimento */
     .card { background: #fff; border: 0.5px solid #E8D5BC; border-radius: 12px;
       padding: 16px 18px; margin-bottom: 10px; display: flex; align-items: center;
-      justify-content: space-between; cursor: pointer; transition: all .15s; }
+      justify-content: space-between; cursor: pointer; }
     .card.sel { background: #2C2218; border-color: #2C2218; }
     .card-nome { font-size: 15px; font-weight: 600; color: #2C2218; margin-bottom: 3px; }
     .card.sel .card-nome { color: #F5EDE0; }
@@ -50,39 +73,71 @@
     .card-icon { font-size: 20px; color: #E8D5BC; }
     .card.sel .card-icon { color: #B8966E; }
 
-    .resumo-card { background: #fff; border: 0.5px solid #E8D5BC; border-radius: 16px; padding: 24px 20px; margin-bottom: 20px; }
+    /* Cards promoção */
+    .promo-card { border-radius: 18px; margin-bottom: 16px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(184,150,110,0.15); position: relative; }
+    .promo-card-header { background: linear-gradient(135deg, #2C2218 0%, #5C3D2E 100%);
+      padding: 20px 20px 14px; position: relative; overflow: hidden; }
+    .promo-coracao-bg { position: absolute; top: -10px; right: -10px; font-size: 80px; opacity: 0.08; line-height: 1; }
+    .promo-badge { display: inline-block; background: #B8966E; color: #fff; font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; margin-bottom: 10px; }
+    .promo-nome { font-size: 18px; font-weight: 700; color: #F5EDE0; margin-bottom: 4px; }
+    .promo-proc { font-size: 12px; color: #C9A882; letter-spacing: 1px; }
+    .promo-coracao-deco { display: flex; gap: 4px; margin-top: 10px; }
+    .promo-coracao-deco span { font-size: 12px; opacity: 0.6; }
+    .promo-card-body { background: #fff; padding: 16px 20px; }
+    .promo-desc { font-size: 13px; color: #5C3D2E; line-height: 1.6; margin-bottom: 14px; font-style: italic; }
+    .promo-footer { display: flex; align-items: center; justify-content: space-between; }
+    .promo-valor { font-size: 22px; font-weight: 700; color: #2C2218; }
+    .promo-valor span { font-size: 13px; font-weight: 400; color: #8B7355; }
+    .promo-btn { background: #2C2218; color: #F5EDE0; border: none; border-radius: 10px;
+      padding: 10px 16px; font-size: 11px; font-family: 'Playfair Display', serif;
+      letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; }
+
+    /* Resumo */
+    .resumo-card { background: #fff; border: 0.5px solid #E8D5BC; border-radius: 16px; padding: 24px 20px; margin-bottom: 16px; }
     .row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 0.5px solid #F5EDE0; }
     .row:last-child { border-bottom: none; }
     .lbl { font-size: 12px; color: #8B7355; letter-spacing: 1px; text-transform: uppercase; }
     .val { font-size: 14px; color: #2C2218; font-weight: 600; text-align: right; max-width: 200px; }
-
-    .dra-selo { display: flex; align-items: center; gap: 12px; margin-top: 20px;
-      padding: 14px 16px; background: #F5EDE0; border-radius: 12px; }
-    .dra-avatar { width: 44px; height: 44px; border-radius: 50%; background: #B8966E;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 16px; font-weight: 700; flex-shrink: 0; }
+    .dra-selo { display: flex; align-items: center; gap: 12px; margin-top: 20px; padding: 14px 16px; background: #F5EDE0; border-radius: 12px; }
+    .dra-avatar { width: 44px; height: 44px; border-radius: 50%; background: #B8966E; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: 700; flex-shrink: 0; }
     .dra-nome { font-size: 14px; font-weight: 600; color: #2C2218; }
     .dra-cargo { font-size: 11px; color: #8B7355; letter-spacing: 0.5px; margin-top: 2px; }
-
-    .info-banner { background: #F5EDE0; border: 0.5px solid #E8D5BC; border-radius: 12px;
-      padding: 14px 16px; margin-bottom: 20px; display: flex; gap: 12px; align-items: flex-start; }
-    .info-banner-titulo { font-size: 13px; font-weight: 600; color: #2C2218; margin-bottom: 4px; }
-    .info-banner-texto { font-size: 12px; color: #8B7355; line-height: 1.6; }
-
     .nota { text-align: center; font-size: 11px; color: #8B7355; margin-top: 14px; letter-spacing: 0.5px; }
-
-    .hidden { display: none; }
-    a.btn-link { text-decoration: none; display: block; }
   </style>
 </head>
 <body>
 <div id="app"></div>
-
 <script>
 const BASE = "https://cal.com/franciely-cristina-da-silva-mqkz9c";
+
+// ═══════════════════════════════════════════
+// PROMOÇÕES — edite aqui para atualizar
+// ═══════════════════════════════════════════
+const promocoes = [
+  {
+    id: 1,
+    nome: "Dia dos Namorados",
+    procedimento: "Limpeza de Pele",
+    descricao: "Limpeza de pele profunda, momento para relaxar e cuidar de quem você ama.",
+    valor: "169,90",
+    slug: "limpeza-de-pele"
+  },
+  {
+    id: 2,
+    nome: "Botox Day",
+    procedimento: "Botox",
+    descricao: "Botox em 3 áreas com resultado natural e duradouro.",
+    valor: "880,00",
+    slug: "botox"
+  },
+];
+// ═══════════════════════════════════════════
+
 const procedimentos = [
   { id:0,  nome:"Avaliação",                      dur:"30 min", slug:"avaliacao" },
-  { id:1,  nome:"Botox",                         dur:"45 min", slug:"botox" },
+  { id:1,  nome:"Botox",                          dur:"45 min", slug:"botox" },
   { id:2,  nome:"Preenchimento Facial",           dur:"60 min", slug:"preenchimento-facial" },
   { id:3,  nome:"Rinomodelação",                  dur:"60 min", slug:"rinomodelacao" },
   { id:4,  nome:"Limpeza de Pele",                dur:"75 min", slug:"limpeza-de-pele" },
@@ -100,7 +155,7 @@ const procedimentos = [
   { id:16, nome:"Remoção de Preenchedor",         dur:"60 min", slug:"remocao-de-preenchedor" },
 ];
 
-let estado = { tela: "entrada", nome: "", tel: "", proc: null };
+let estado = { tela:"entrada", nome:"", tel:"", proc:null };
 
 function formatTel(v) {
   v = v.replace(/\D/g,"").slice(0,11);
@@ -109,41 +164,89 @@ function formatTel(v) {
   return `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
 }
 
+const draSelo = `
+  <div class="dra-selo">
+    <div class="dra-avatar">FC</div>
+    <div>
+      <div class="dra-nome">Dra. Franciely Cristina</div>
+      <div class="dra-cargo">CEO · Responsável pelo procedimento</div>
+    </div>
+  </div>`;
+
+const topo = () => `
+  <div class="topo">
+    <div class="logo">Vellut</div>
+    <div class="sub">clínica estética</div>
+  </div>`;
+
+const steps = (ativo) => `
+  <div class="steps">
+    <div class="dot ${ativo===1?'ativo':''}"></div>
+    <div class="dot ${ativo===2?'ativo':''}"></div>
+    <div class="dot ${ativo===3?'ativo':''}"></div>
+  </div>`;
+
+// SVG ícones das redes
+const icoInstagram = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%">
+    <stop offset="0%" style="stop-color:#f09433"/>
+    <stop offset="25%" style="stop-color:#e6683c"/>
+    <stop offset="50%" style="stop-color:#dc2743"/>
+    <stop offset="75%" style="stop-color:#cc2366"/>
+    <stop offset="100%" style="stop-color:#bc1888"/>
+  </stop></linearGradient></defs>
+  <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig)"/>
+  <circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="1.8" fill="none"/>
+  <circle cx="17.2" cy="6.8" r="1.2" fill="white"/>
+</svg>`;
+
+const icoTiktok = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="24" rx="5" fill="#010101"/>
+  <path d="M17 8.5c-1.1 0-2-.9-2-2V4h-2.5v10.5c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.2 0 .4 0 .5.1V10c-.2 0-.3-.1-.5-.1-2.5 0-4.5 2-4.5 4.5S8 19 10.5 19s4.5-2 4.5-4.5V9.9c.8.6 1.8.9 2.8.9V8.5H17z" fill="white"/>
+</svg>`;
+
+const icoYoutube = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="24" rx="5" fill="#FF0000"/>
+  <path d="M19.8 8.2c-.2-.8-.8-1.4-1.6-1.6C16.8 6.3 12 6.3 12 6.3s-4.8 0-6.2.3c-.8.2-1.4.8-1.6 1.6C4 9.5 4 12 4 12s0 2.5.2 3.8c.2.8.8 1.4 1.6 1.6 1.4.3 6.2.3 6.2.3s4.8 0 6.2-.3c.8-.2 1.4-.8 1.6-1.6.2-1.3.2-3.8.2-3.8s0-2.5-.2-3.8z" fill="white"/>
+  <polygon points="10,9.5 10,14.5 14.5,12" fill="#FF0000"/>
+</svg>`;
+
+function irParaAgendamento(slug, nomeProc) {
+  estado.proc = procedimentos.find(p => p.slug === slug) || { nome: nomeProc, dur:"60 min", slug };
+  estado.tela = "resumo";
+  render();
+}
+
 function render() {
   const app = document.getElementById("app");
   const { tela, nome, tel, proc } = estado;
 
-  const topo = (center=false) => `
-    <div class="topo ${center?"topo-center":""}">
-      <div class="logo">Vellut</div>
-      <div class="sub">clínica estética</div>
-    </div>`;
-
-  const steps = (ativo) => `
-    <div class="steps">
-      <div class="dot ${ativo===1?'ativo':''}"></div>
-      <div class="dot ${ativo===2?'ativo':''}"></div>
-      <div class="dot ${ativo===3?'ativo':''}"></div>
-    </div>`;
-
-  const draSelo = `
-    <div class="dra-selo">
-      <div class="dra-avatar">FC</div>
-      <div>
-        <div class="dra-nome">Dra. Franciely Cristina</div>
-        <div class="dra-cargo">CEO · Responsável pelo procedimento</div>
-      </div>
-    </div>`;
-
+  // ── Tela 1: Entrada ──
   if (tela === "entrada") {
     app.innerHTML = `
-      ${topo(true)}
+      ${topo()}
       <div class="corpo">
         <div class="titulo" style="margin-bottom:4px">Olá, que bom ter você por aqui. 🤍</div>
-        <div class="subtitulo" style="margin-bottom:28px">preencha para agendar</div>
+        <div class="subtitulo" style="margin-bottom:28px">preencha para continuar</div>
         <input id="inp-nome" type="text" placeholder="Seu nome completo" value="${nome}" />
         <input id="inp-tel" type="tel" inputmode="numeric" placeholder="(00) 00000-0000" value="${tel}" />
         <button class="btn-primario" id="btn-continuar" ${nome&&tel.length>=14?'':'disabled'}>Continuar</button>
+
+        <div class="redes-titulo">já me segue nas redes sociais?</div>
+        <div class="redes-grid">
+          <a href="https://www.instagram.com/dra.francielycristina/" target="_blank" class="rede-btn">
+            <div class="rede-icon">${icoInstagram}</div>
+            <span class="rede-nome">Instagram</span>
+          </a>
+          <a href="https://www.tiktok.com/@dra.francielycristina?lang=pt-BR" target="_blank" class="rede-btn">
+            <div class="rede-icon">${icoTiktok}</div>
+            <span class="rede-nome">TikTok</span>
+          </a>
+          <a href="https://www.youtube.com/@Drafrancielycristina" target="_blank" class="rede-btn">
+            <div class="rede-icon">${icoYoutube}</div>
+            <span class="rede-nome">YouTube</span>
+          </a>
+        </div>
         <p class="nota">Suas informações são usadas apenas para o agendamento.</p>
       </div>`;
 
@@ -157,10 +260,36 @@ function render() {
       document.getElementById("btn-continuar").disabled = !(estado.nome && estado.tel.length >= 14);
     });
     document.getElementById("btn-continuar").addEventListener("click", () => {
-      estado.tela = "procedimento"; render();
+      estado.tela = "menu"; render();
     });
   }
 
+  // ── Tela 2: Menu ──
+  else if (tela === "menu") {
+    app.innerHTML = `
+      ${topo()}
+      <div class="corpo">
+        <div style="margin-bottom:6px;font-size:15px;color:#2C2218;">Olá, <strong>${nome}</strong> 🤍</div>
+        <div class="subtitulo" style="margin-bottom:0">o que vamos fazer hoje?</div>
+        <div class="menu-grid">
+          <div class="menu-card destaque" id="btn-agendar">
+            <div class="menu-card-icon">✦</div>
+            <div class="menu-card-titulo">Agendar</div>
+            <div class="menu-card-sub">Escolha seu procedimento</div>
+          </div>
+          <div class="menu-card" id="btn-promos">
+            <div class="menu-card-icon">🤍</div>
+            <div class="menu-card-titulo">Promoções</div>
+            <div class="menu-card-sub">Ofertas especiais</div>
+          </div>
+        </div>
+      </div>`;
+
+    document.getElementById("btn-agendar").addEventListener("click", () => { estado.tela="procedimento"; render(); });
+    document.getElementById("btn-promos").addEventListener("click", () => { estado.tela="promocoes"; render(); });
+  }
+
+  // ── Tela 3a: Procedimentos ──
   else if (tela === "procedimento") {
     const cards = procedimentos.map(p => `
       <div class="card ${proc?.id===p.id?'sel':''}" data-id="${p.id}">
@@ -182,7 +311,7 @@ function render() {
         <button class="btn-primario" id="btn-continuar2" ${proc?'':'disabled'}>Continuar</button>
       </div>`;
 
-    document.getElementById("btn-voltar").addEventListener("click", () => { estado.tela="entrada"; render(); });
+    document.getElementById("btn-voltar").addEventListener("click", () => { estado.tela="menu"; render(); });
     document.querySelectorAll(".card").forEach(el => {
       el.addEventListener("click", () => {
         estado.proc = procedimentos.find(p => p.id === +el.dataset.id);
@@ -192,6 +321,44 @@ function render() {
     document.getElementById("btn-continuar2").addEventListener("click", () => { estado.tela="resumo"; render(); });
   }
 
+  // ── Tela 3b: Promoções ──
+  else if (tela === "promocoes") {
+    const cards = promocoes.map(p => `
+      <div class="promo-card">
+        <div class="promo-card-header">
+          <div class="promo-coracao-bg">♥</div>
+          <div class="promo-badge">Oferta especial</div>
+          <div class="promo-nome">${p.nome}</div>
+          <div class="promo-proc">${p.procedimento}</div>
+          <div class="promo-coracao-deco">
+            <span>🤍</span><span>🤍</span><span>🤍</span>
+          </div>
+        </div>
+        <div class="promo-card-body">
+          <div class="promo-desc">"${p.descricao}"</div>
+          <div class="promo-footer">
+            <div class="promo-valor"><span>R$ </span>${p.valor}</div>
+            <button class="promo-btn" data-slug="${p.slug}" data-nome="${p.procedimento}">Agendar ✦</button>
+          </div>
+        </div>
+      </div>`).join("");
+
+    app.innerHTML = `
+      ${topo()}
+      <div class="corpo">
+        <button class="voltar" id="btn-voltar">← Voltar</button>
+        <div class="titulo">Promoções</div>
+        <div class="subtitulo" style="margin-bottom:20px">ofertas especiais da Vellut</div>
+        ${cards}
+      </div>`;
+
+    document.getElementById("btn-voltar").addEventListener("click", () => { estado.tela="menu"; render(); });
+    document.querySelectorAll(".promo-btn").forEach(btn => {
+      btn.addEventListener("click", () => irParaAgendamento(btn.dataset.slug, btn.dataset.nome));
+    });
+  }
+
+  // ── Tela 4: Resumo + iframe Cal.com ──
   else if (tela === "resumo") {
     const calUrl = `${BASE}/${proc.slug}?name=${encodeURIComponent(nome)}&phone=${encodeURIComponent(tel)}&embed=true`;
     app.innerHTML = `
@@ -200,24 +367,18 @@ function render() {
         ${steps(2)}
         <button class="voltar" id="btn-voltar">← Voltar</button>
         <div class="titulo">Confirme e agende</div>
-        <div class="subtitulo" style="margin-bottom:16px">${proc.nome} · ${proc.dur}</div>
-        <div class="resumo-card" style="margin-bottom:16px">
+        <div class="subtitulo" style="margin-bottom:16px">${proc.nome} · ${proc.dur || "60 min"}</div>
+        <div class="resumo-card">
           <div class="row"><span class="lbl">Cliente</span><span class="val">${nome}</span></div>
           <div class="row"><span class="lbl">Telefone</span><span class="val">${tel}</span></div>
           <div class="row" style="border-bottom:none"><span class="lbl">Procedimento</span><span class="val">${proc.nome}</span></div>
           ${draSelo}
         </div>
         <div style="font-size:12px;color:#8B7355;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px">Escolha a data e horário</div>
-        <div id="cal-wrapper" style="border-radius:14px;overflow:hidden;border:0.5px solid #E8D5BC;background:#fff;min-height:600px;">
-          <iframe 
-            id="cal-iframe"
-            src="${calUrl}"
-            width="100%" 
-            height="600" 
-            frameborder="0"
-            style="display:block;border:none;border-radius:14px;"
-            allow="camera; microphone; fullscreen"
-            title="Agendamento Vellut">
+        <div style="border-radius:14px;overflow:hidden;border:0.5px solid #E8D5BC;background:#fff;min-height:600px;">
+          <iframe id="cal-iframe" src="${calUrl}" width="100%" height="600"
+            frameborder="0" style="display:block;border:none;border-radius:14px;"
+            allow="camera; microphone; fullscreen" title="Agendamento Vellut">
           </iframe>
         </div>
         <button class="btn-secundario" id="btn-trocar" style="margin-top:16px">Trocar Procedimento</button>
@@ -226,7 +387,6 @@ function render() {
     document.getElementById("btn-voltar").addEventListener("click", () => { estado.tela="procedimento"; render(); });
     document.getElementById("btn-trocar").addEventListener("click", () => { estado.tela="procedimento"; render(); });
 
-    // Detecta conclusão do agendamento via mensagem do Cal.com
     window.addEventListener("message", function handler(e) {
       if (e.data && (
         e.data.type === "cal:bookingSuccessful" ||
@@ -234,32 +394,27 @@ function render() {
         (typeof e.data === "string" && e.data.includes("booking"))
       )) {
         window.removeEventListener("message", handler);
-        estado.tela = "sucesso";
-        render();
+        estado.tela = "sucesso"; render();
       }
     });
 
-    // Fallback: monitora URL do iframe para detectar página de confirmação
     const iframe = document.getElementById("cal-iframe");
     if (iframe) {
       const monitor = setInterval(() => {
         try {
           const url = iframe.contentWindow?.location?.href || "";
           if (url.includes("booking") || url.includes("success") || url.includes("confirmed")) {
-            clearInterval(monitor);
-            estado.tela = "sucesso";
-            render();
+            clearInterval(monitor); estado.tela = "sucesso"; render();
           }
-        } catch(e) {
-          // cross-origin bloqueado — normal, continua monitorando via postMessage
-        }
+        } catch(e) {}
       }, 800);
     }
   }
 
+  // ── Tela 5: Sucesso ──
   else if (tela === "sucesso") {
     app.innerHTML = `
-      ${topo(true)}
+      ${topo()}
       <div class="corpo" style="text-align:center;padding-top:40px;">
         <div style="width:70px;height:70px;border-radius:50%;background:#F5EDE0;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:32px;">✦</div>
         <div class="titulo" style="margin-bottom:8px">Agendado com sucesso!</div>
@@ -274,11 +429,11 @@ function render() {
             <div class="dra-cargo">Aguarda você na Vellut ✦</div>
           </div>
         </div>
-        <button class="btn-secundario" id="btn-novo" style="margin-top:0">Novo Agendamento</button>
+        <button class="btn-secundario" id="btn-novo">Novo Agendamento</button>
       </div>`;
+
     document.getElementById("btn-novo").addEventListener("click", () => {
-      estado = { tela:"entrada", nome:"", tel:"", proc:null };
-      render();
+      estado = { tela:"entrada", nome:"", tel:"", proc:null }; render();
     });
   }
 }
