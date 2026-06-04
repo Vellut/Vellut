@@ -208,8 +208,9 @@ function render() {
           ${draSelo}
         </div>
         <div style="font-size:12px;color:#8B7355;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px">Escolha a data e horário</div>
-        <div style="border-radius:14px;overflow:hidden;border:0.5px solid #E8D5BC;background:#fff;min-height:600px;">
+        <div id="cal-wrapper" style="border-radius:14px;overflow:hidden;border:0.5px solid #E8D5BC;background:#fff;min-height:600px;">
           <iframe 
+            id="cal-iframe"
             src="${calUrl}"
             width="100%" 
             height="600" 
@@ -224,6 +225,61 @@ function render() {
 
     document.getElementById("btn-voltar").addEventListener("click", () => { estado.tela="procedimento"; render(); });
     document.getElementById("btn-trocar").addEventListener("click", () => { estado.tela="procedimento"; render(); });
+
+    // Detecta conclusão do agendamento via mensagem do Cal.com
+    window.addEventListener("message", function handler(e) {
+      if (e.data && (
+        e.data.type === "cal:bookingSuccessful" ||
+        e.data.type === "bookingSuccessful" ||
+        (typeof e.data === "string" && e.data.includes("booking"))
+      )) {
+        window.removeEventListener("message", handler);
+        estado.tela = "sucesso";
+        render();
+      }
+    });
+
+    // Fallback: monitora URL do iframe para detectar página de confirmação
+    const iframe = document.getElementById("cal-iframe");
+    if (iframe) {
+      const monitor = setInterval(() => {
+        try {
+          const url = iframe.contentWindow?.location?.href || "";
+          if (url.includes("booking") || url.includes("success") || url.includes("confirmed")) {
+            clearInterval(monitor);
+            estado.tela = "sucesso";
+            render();
+          }
+        } catch(e) {
+          // cross-origin bloqueado — normal, continua monitorando via postMessage
+        }
+      }, 800);
+    }
+  }
+
+  else if (tela === "sucesso") {
+    app.innerHTML = `
+      ${topo(true)}
+      <div class="corpo" style="text-align:center;padding-top:40px;">
+        <div style="width:70px;height:70px;border-radius:50%;background:#F5EDE0;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:32px;">✦</div>
+        <div class="titulo" style="margin-bottom:8px">Agendado com sucesso!</div>
+        <div style="font-size:14px;color:#8B7355;margin-bottom:24px;line-height:1.7;">
+          ${nome}, seu agendamento de<br><strong>${proc?.nome}</strong> está confirmado.<br>
+          <span style="font-size:12px;">A confirmação foi enviada por e-mail.</span>
+        </div>
+        <div class="dra-selo" style="text-align:left;margin-bottom:32px;">
+          <div class="dra-avatar">FC</div>
+          <div>
+            <div class="dra-nome">Dra. Franciely Cristina</div>
+            <div class="dra-cargo">Aguarda você na Vellut ✦</div>
+          </div>
+        </div>
+        <button class="btn-secundario" id="btn-novo" style="margin-top:0">Novo Agendamento</button>
+      </div>`;
+    document.getElementById("btn-novo").addEventListener("click", () => {
+      estado = { tela:"entrada", nome:"", tel:"", proc:null };
+      render();
+    });
   }
 }
 
