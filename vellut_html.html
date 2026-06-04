@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <title>Vellut — Agendamento</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #FAF7F2; font-family: 'Playfair Display', Georgia, serif; min-height: 100vh; }
+    #app { max-width: 390px; margin: 0 auto; min-height: 100vh; background: #FAF7F2; }
+
+    .topo { background: #fff; padding: 28px 24px 20px; border-bottom: 0.5px solid #E8D5BC; }
+    .topo-center { text-align: center; padding: 40px 24px 28px; }
+    .logo { font-size: 26px; font-weight: 700; color: #2C2218; letter-spacing: 6px; text-transform: uppercase; }
+    .sub { font-size: 11px; color: #8B7355; letter-spacing: 3px; margin-top: 2px; font-style: italic; }
+    .corpo { padding: 24px 20px; }
+
+    .steps { display: flex; gap: 6px; margin-bottom: 22px; }
+    .dot { height: 6px; border-radius: 4px; background: #E8D5BC; transition: width .3s; width: 6px; }
+    .dot.ativo { background: #2C2218; width: 24px; }
+
+    .titulo { font-size: 20px; font-weight: 700; color: #2C2218; margin-bottom: 6px; }
+    .subtitulo { font-size: 12px; color: #8B7355; letter-spacing: 1.5px; margin-bottom: 24px; text-transform: uppercase; }
+
+    input { width: 100%; padding: 14px 16px; font-size: 15px; font-family: 'Playfair Display', serif;
+      background: #fff; border: 0.5px solid #E8D5BC; border-radius: 10px; outline: none;
+      color: #2C2218; margin-bottom: 12px; }
+
+    .btn-primario { width: 100%; padding: 15px; background: #2C2218; color: #F5EDE0;
+      border: none; border-radius: 10px; font-size: 13px; font-family: 'Playfair Display', serif;
+      letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 8px; transition: opacity .2s; }
+    .btn-primario:disabled { opacity: 0.4; cursor: default; }
+    .btn-secundario { width: 100%; padding: 13px; background: none; border: 0.5px solid #E8D5BC;
+      color: #8B7355; border-radius: 10px; font-size: 12px; font-family: 'Playfair Display', serif;
+      letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
+
+    .voltar { background: none; border: none; color: #8B7355; font-size: 13px;
+      font-family: 'Playfair Display', serif; cursor: pointer; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 6px; letter-spacing: 1px; }
+
+    .card { background: #fff; border: 0.5px solid #E8D5BC; border-radius: 12px;
+      padding: 16px 18px; margin-bottom: 10px; display: flex; align-items: center;
+      justify-content: space-between; cursor: pointer; transition: all .15s; }
+    .card.sel { background: #2C2218; border-color: #2C2218; }
+    .card-nome { font-size: 15px; font-weight: 600; color: #2C2218; margin-bottom: 3px; }
+    .card.sel .card-nome { color: #F5EDE0; }
+    .card-dur { font-size: 12px; color: #8B7355; letter-spacing: 1px; }
+    .card.sel .card-dur { color: #E8D5BC; }
+    .card-icon { font-size: 20px; color: #E8D5BC; }
+    .card.sel .card-icon { color: #B8966E; }
+
+    .resumo-card { background: #fff; border: 0.5px solid #E8D5BC; border-radius: 16px; padding: 24px 20px; margin-bottom: 20px; }
+    .row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 0.5px solid #F5EDE0; }
+    .row:last-child { border-bottom: none; }
+    .lbl { font-size: 12px; color: #8B7355; letter-spacing: 1px; text-transform: uppercase; }
+    .val { font-size: 14px; color: #2C2218; font-weight: 600; text-align: right; max-width: 200px; }
+
+    .dra-selo { display: flex; align-items: center; gap: 12px; margin-top: 20px;
+      padding: 14px 16px; background: #F5EDE0; border-radius: 12px; }
+    .dra-avatar { width: 44px; height: 44px; border-radius: 50%; background: #B8966E;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 16px; font-weight: 700; flex-shrink: 0; }
+    .dra-nome { font-size: 14px; font-weight: 600; color: #2C2218; }
+    .dra-cargo { font-size: 11px; color: #8B7355; letter-spacing: 0.5px; margin-top: 2px; }
+
+    .info-banner { background: #F5EDE0; border: 0.5px solid #E8D5BC; border-radius: 12px;
+      padding: 14px 16px; margin-bottom: 20px; display: flex; gap: 12px; align-items: flex-start; }
+    .info-banner-titulo { font-size: 13px; font-weight: 600; color: #2C2218; margin-bottom: 4px; }
+    .info-banner-texto { font-size: 12px; color: #8B7355; line-height: 1.6; }
+
+    .nota { text-align: center; font-size: 11px; color: #8B7355; margin-top: 14px; letter-spacing: 0.5px; }
+
+    .hidden { display: none; }
+    a.btn-link { text-decoration: none; display: block; }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+const BASE = "https://cal.com/franciely-cristina-da-silva-mqkz9c";
+const procedimentos = [
+  { id:1,  nome:"Botox",                         dur:"45 min", slug:"botox" },
+  { id:2,  nome:"Preenchimento Facial",           dur:"60 min", slug:"preenchimento-facial" },
+  { id:3,  nome:"Rinomodelação",                  dur:"60 min", slug:"rinomodelacao" },
+  { id:4,  nome:"Limpeza de Pele",                dur:"75 min", slug:"limpeza-de-pele" },
+  { id:5,  nome:"Enzimas & Vitaminas",            dur:"40 min", slug:"enzimas-vitaminas" },
+  { id:6,  nome:"Preenchimento Labial",           dur:"45 min", slug:"preenchimento-labial" },
+  { id:7,  nome:"Microvasos",                     dur:"60 min", slug:"microvasos" },
+  { id:8,  nome:"Bioestimulador de Colágeno",     dur:"60 min", slug:"bioestimulador-de-colageno" },
+  { id:9,  nome:"Microagulhamento",               dur:"60 min", slug:"microagulhamento" },
+  { id:10, nome:"Remoção de Pintas e Verrugas",   dur:"60 min", slug:"remocao-de-pintas-e-verrugas" },
+  { id:11, nome:"Tratamento Capilar",             dur:"60 min", slug:"tratamento-capilar" },
+  { id:12, nome:"Peeling Químico",                dur:"60 min", slug:"peeling-quimico" },
+  { id:13, nome:"Herus HIFU",                     dur:"60 min", slug:"herus-hifu" },
+  { id:14, nome:"Protocolos de Rejuvenescimento", dur:"60 min", slug:"protocolos-de-rejuvenescimento" },
+  { id:15, nome:"Jato de Plasma",                 dur:"60 min", slug:"jato-de-plasma" },
+  { id:16, nome:"Remoção de Preenchedor",         dur:"60 min", slug:"remocao-de-preenchedor" },
+];
+
+let estado = { tela: "entrada", nome: "", tel: "", proc: null };
+
+function formatTel(v) {
+  v = v.replace(/\D/g,"").slice(0,11);
+  if (v.length<=2) return v;
+  if (v.length<=7) return `(${v.slice(0,2)}) ${v.slice(2)}`;
+  return `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+}
+
+function render() {
+  const app = document.getElementById("app");
+  const { tela, nome, tel, proc } = estado;
+
+  const topo = (center=false) => `
+    <div class="topo ${center?"topo-center":""}">
+      <div class="logo">Vellut</div>
+      <div class="sub">clínica estética</div>
+    </div>`;
+
+  const steps = (ativo) => `
+    <div class="steps">
+      <div class="dot ${ativo===1?'ativo':''}"></div>
+      <div class="dot ${ativo===2?'ativo':''}"></div>
+      <div class="dot ${ativo===3?'ativo':''}"></div>
+    </div>`;
+
+  const draSelo = `
+    <div class="dra-selo">
+      <div class="dra-avatar">FC</div>
+      <div>
+        <div class="dra-nome">Dra. Franciely Cristina</div>
+        <div class="dra-cargo">CEO · Responsável pelo procedimento</div>
+      </div>
+    </div>`;
+
+  if (tela === "entrada") {
+    app.innerHTML = `
+      ${topo(true)}
+      <div class="corpo">
+        <div class="titulo" style="margin-bottom:4px">Olá, que bom ter você por aqui.</div>
+        <div class="subtitulo" style="margin-bottom:28px">preencha para agendar</div>
+        <input id="inp-nome" type="text" placeholder="Seu nome completo" value="${nome}" />
+        <input id="inp-tel" type="tel" inputmode="numeric" placeholder="(00) 00000-0000" value="${tel}" />
+        <button class="btn-primario" id="btn-continuar" ${nome&&tel.length>=14?'':'disabled'}>Continuar</button>
+        <p class="nota">Suas informações são usadas apenas para o agendamento.</p>
+      </div>`;
+
+    document.getElementById("inp-nome").addEventListener("input", e => {
+      estado.nome = e.target.value;
+      document.getElementById("btn-continuar").disabled = !(estado.nome && estado.tel.length >= 14);
+    });
+    document.getElementById("inp-tel").addEventListener("input", e => {
+      estado.tel = formatTel(e.target.value);
+      e.target.value = estado.tel;
+      document.getElementById("btn-continuar").disabled = !(estado.nome && estado.tel.length >= 14);
+    });
+    document.getElementById("btn-continuar").addEventListener("click", () => {
+      estado.tela = "procedimento"; render();
+    });
+  }
+
+  else if (tela === "procedimento") {
+    const cards = procedimentos.map(p => `
+      <div class="card ${proc?.id===p.id?'sel':''}" data-id="${p.id}">
+        <div>
+          <div class="card-nome">${p.nome}</div>
+          <div class="card-dur">${p.dur}</div>
+        </div>
+        <div class="card-icon">✦</div>
+      </div>`).join("");
+
+    app.innerHTML = `
+      ${topo()}
+      <div class="corpo">
+        ${steps(1)}
+        <button class="voltar" id="btn-voltar">← Voltar</button>
+        <div class="titulo">Escolha o procedimento</div>
+        <div class="subtitulo">Dra. Franciely Cristina</div>
+        ${cards}
+        <button class="btn-primario" id="btn-continuar2" ${proc?'':'disabled'}>Continuar</button>
+      </div>`;
+
+    document.getElementById("btn-voltar").addEventListener("click", () => { estado.tela="entrada"; render(); });
+    document.querySelectorAll(".card").forEach(el => {
+      el.addEventListener("click", () => {
+        estado.proc = procedimentos.find(p => p.id === +el.dataset.id);
+        render();
+      });
+    });
+    document.getElementById("btn-continuar2").addEventListener("click", () => { estado.tela="resumo"; render(); });
+  }
+
+  else if (tela === "resumo") {
+    const calUrl = `${BASE}/${proc.slug}?name=${encodeURIComponent(nome)}&phone=${encodeURIComponent(tel)}`;
+    app.innerHTML = `
+      ${topo()}
+      <div class="corpo">
+        ${steps(2)}
+        <button class="voltar" id="btn-voltar">← Voltar</button>
+        <div class="titulo">Confirme e agende</div>
+        <div class="subtitulo" style="margin-bottom:20px">revise antes de prosseguir</div>
+        <div class="resumo-card">
+          <div class="row"><span class="lbl">Cliente</span><span class="val">${nome}</span></div>
+          <div class="row"><span class="lbl">Telefone</span><span class="val">${tel}</span></div>
+          <div class="row"><span class="lbl">Procedimento</span><span class="val">${proc.nome}</span></div>
+          ${draSelo}
+        </div>
+        <div class="info-banner">
+          <div style="font-size:18px;flex-shrink:0;margin-top:2px">📅</div>
+          <div>
+            <div class="info-banner-titulo">Escolha sua data e horário</div>
+            <div class="info-banner-texto">Ao continuar, você será direcionada para a agenda da Dra. Franciely onde poderá escolher o melhor dia e horário. A confirmação chega direto no seu e-mail.</div>
+          </div>
+        </div>
+        <a href="${calUrl}" target="_blank" class="btn-link">
+          <button class="btn-primario">Escolher Data & Horário</button>
+        </a>
+        <button class="btn-secundario" id="btn-trocar">Trocar Procedimento</button>
+        <p class="nota">Você receberá uma confirmação em breve.</p>
+      </div>`;
+
+    document.getElementById("btn-voltar").addEventListener("click", () => { estado.tela="procedimento"; render(); });
+    document.getElementById("btn-trocar").addEventListener("click", () => { estado.tela="procedimento"; render(); });
+  }
+}
+
+render();
+</script>
+</body>
+</html>
